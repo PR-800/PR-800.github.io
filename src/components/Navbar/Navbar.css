@@ -1,0 +1,107 @@
+.nav-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  transition: all 0.3s ease;
+  background-color: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(229, 231, 235, 1);
+}
+
+.nav-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+@media (min-width: 1024px) {
+  .nav-container {
+    padding: 0 48px;
+  }
+}
+
+.nav-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+}
+
+.logo-button {
+  font-size: 1.25rem;
+  font-weight: 300;
+  color: black;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.logo-button:hover {
+  transform: scale(1.05);
+}
+
+.nav-desktop {
+  display: none;
+  align-items: center;
+}
+
+@media (min-width: 768px) {
+  .nav-desktop {
+    display: flex;
+  }
+}
+
+.nav-items {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.nav-item-button {
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: black;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.nav-item-button:hover {
+  transform: translateY(-2px);
+  color: #4b5563;
+}
+
+.resume-button {
+  background-color: black;
+  color: white;
+  padding: 8px 24px;
+  font-size: 0.875rem;
+  font-weight: 400;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.resume-button:hover {
+  transform: scale(1.05);
+}
+
+.nav-mobile {
+  display: block;
+  padding: 8px;
+  color: black;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+@media (min-width: 768px) {
+  .nav-mobile  {
+    display: none;
+  }
+}
