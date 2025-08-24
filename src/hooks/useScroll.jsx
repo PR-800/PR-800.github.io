@@ -11,7 +11,6 @@ export const useScroll = () => {
     }
   }, []);
 
-
   return {
     scrollToSection,
   };
