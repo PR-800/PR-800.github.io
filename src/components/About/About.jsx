@@ -29,57 +29,6 @@ export default function About() {
     },
   ];
 
-  const skills = [
-    {
-      icon: "/assets/logo_python.png",
-      title: "Python",
-      description: "3+ years experience",
-    },
-    {
-      icon: "/assets/logo_python.png",
-      title: "Python",
-      description: "3+ years experience in data analysis and programming",
-    },
-    {
-      icon: "/assets/logo_python.png",
-      title: "Python",
-      description: "3+ years experience in data analysis and programming",
-    },
-  ];
-
-  const miniSkills = [
-    {
-      icon: "/assets/logo_python.png",
-      title: "mini Python",
-      description: "3+ years experience",
-    },
-    {
-      icon: "/assets/logo_python.png",
-      title: "mini Python",
-      description: "3+ years experience in data analysis and programming",
-    },
-    {
-      icon: "/assets/logo_python.png",
-      title: "mini Python",
-      description: "3+ years experience in data analysis and programming",
-    },
-    {
-      icon: "/assets/logo_python.png",
-      title: "mini Python",
-      description: "3+ years experience",
-    },
-    {
-      icon: "/assets/logo_python.png",
-      title: "mini Python",
-      description: "3+ years experience in data analysis and programming",
-    },
-    {
-      icon: "/assets/logo_python.png",
-      title: "mini Python",
-      description: "3+ years experience in data analysis and programming",
-    },
-  ];
-
   const isMobile = useMediaQuery({ maxWidth: 768 });
   const isVisible = useIntersectionObserver("about");
 
@@ -100,7 +49,7 @@ export default function About() {
   const [isExpanded, setIsExpanded] = useState(false);
   const [hiddenHeight, setHiddenHeight] = useState(0);
   const [visibleHeight, setVisibleHeight] = useState(0);
-  const [activeTab, setActiveTab] = useState("highlights");
+  const [activeTab, setActiveTab] = useState("info");
 
   // Get visible highlight height on mount
   useEffect(() => {
@@ -202,16 +151,16 @@ export default function About() {
           <div>
             <div className="tab-navigation">
               <button
+                className={`tab ${activeTab === "info" ? "active" : ""}`}
+                onClick={() => setActiveTab("info")}
+              >
+                About me
+              </button>
+              <button
                 className={`tab ${activeTab === "highlights" ? "active" : ""}`}
                 onClick={() => setActiveTab("highlights")}
               >
                 Key Highlights
-              </button>
-              <button
-                className={`tab ${activeTab === "skills" ? "active" : ""}`}
-                onClick={() => setActiveTab("skills")}
-              >
-                Skills
               </button>
             </div>
 
@@ -264,55 +213,8 @@ export default function About() {
                 </div>
               )}
 
-              {activeTab === "skills" && (
-                <div>
-                  <div className="skill-section">
-                    {skills.map((skill, index) => (
-                      <div
-                        key={index}
-                        className={`skill-item ${fadeBottomFunc()}`}
-                        style={{
-                          animationDelay: `${index * 0.2}s`,
-                        }}
-                      >
-                        <div className="skill-header">
-                          <div className="skill-icon">
-                            <img src={skill.icon} />
-                          </div>
-                          <div className="skill-title">{skill.title}</div>
-                        </div>
-                        <div className="skill-description">
-                          {skill.description}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-
-                  <div
-                    className={`mini-skill-section ${fadeBottomFunc()}`}
-                    style={{
-                      animationDelay: `${skills.length * 0.2}s`,
-                    }}
-                  >
-                    <span className="mini-skill-header">Familiar with :</span>
-                    {miniSkills.map((mini, index) => (
-                      <div
-                        key={index}
-                        className={`skill-item ${fadeBottomFunc()}`}
-                        style={{
-                          animationDelay: `${(index + skills.length) * 0.1}s`,
-                        }}
-                      >
-                        <div className="skill-header">
-                          <div className="skill-icon">
-                            <img src={mini.icon} />
-                          </div>
-                          <div className="skill-title">{mini.title}</div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
+              {activeTab === "info" && (
+                <div></div>
               )}
             </div>
           </div>

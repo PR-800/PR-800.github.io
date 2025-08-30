@@ -2,7 +2,7 @@ import { useScroll } from "../../hooks/useScroll";
 import "./Navbar.css";
 
 export default function Navbar() {
-  const navItems = ["About", "Experience", "Projects", "Contact"];
+  const navItems = ["About", "Skills", "Experience", "Projects", "Contact"];
 
   const { scrollToSection } = useScroll();
 
