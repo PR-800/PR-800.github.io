@@ -1,5 +1,5 @@
 .about-section {
-  min-height: 100vh;
+  /* min-height: 100vh - 64px; */
   background-color: #f9fafb;
   display: flex;
   align-items: flex-start;
@@ -19,7 +19,6 @@
 
 .education-grid {
   /* max-width: 800px; */
-  margin: 2rem auto;
   display: grid;
   grid-template-columns: 10rem 2px auto;
   gap: 40px;
@@ -208,6 +207,7 @@
   font-size: 0.875rem;
   transition: all 0.3s ease;
   align-self: flex-start;
+  margin-top: 20px;
 }
 
 .expand-button:hover {
@@ -270,7 +270,7 @@
 
   .education-divider {
     width: 15rem;
-    height: 1.5px;
+    height: 2px;
     margin: 10px;
   }
 }
@@ -288,7 +288,7 @@
 
   .education-divider {
     width: 15rem;
-    height: 1.5px;
+    height: 2px;
     margin: 10px;
   }
 }

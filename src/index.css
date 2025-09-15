@@ -1,4 +1,8 @@
+/* Or 'index.css' >> imported in 'main.jsx' */
+@import "tailwindcss";
+
 html {
   /* 3 choices to choose if browser does not support */
   font-family: system-ui, sans-serif, ui-sans-serif;
+  cursor: default;
 }
