@@ -10,11 +10,20 @@ export default function Navbar() {
     <header className="nav-header">
       <div className="nav-container">
         <div className="nav-content">
+          {/* Portfolio */}
           <button
             className="logo-button"
             onClick={() => scrollToSection("hero")}
           >
-            Portfolio
+            <span className="logo-container">
+              <span className="logo-content">
+                <span className="main-text">Portfolio</span>
+              </span>
+              <span className="slide-content">
+                <span className="name-divide">|</span>
+                <span className="name-text">Titipa Eamsiriwong</span>
+              </span>
+            </span>
           </button>
 
           {/* Desktop Navigation */}

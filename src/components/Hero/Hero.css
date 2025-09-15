@@ -9,7 +9,7 @@
 }
 
 .hero-section::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -115,6 +115,7 @@
   max-width: 56rem;
   margin: 0 auto;
   line-height: 1.75;
+  white-space: "pre-line";
 }
 
 .scroll-button {

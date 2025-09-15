@@ -60,7 +60,7 @@ export default function Skills() {
                     key={index}
                     className={`skill-item ${fadeBottomFunc()}`}
                     style={{
-                      animationDelay: `${index * 0.1 + index * 0.05}s`,
+                      animationDelay: `${index * 0.2}s`,
                     }}
                   >
                     <div className="skill-content">

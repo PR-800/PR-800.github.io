@@ -2,7 +2,7 @@ import "./Experience.css";
 import { Tooltip } from "react-tooltip";
 import "react-tooltip/dist/react-tooltip.css";
 import { useState, useRef, useEffect } from "react";
-
+import { useIntersectionObserver } from "../../hooks/useObserver";
 
 export default function Experience() {
   const experiences = [
@@ -112,6 +112,11 @@ export default function Experience() {
     "Academic Teaching": { bg: "#dcf5f9ff", text: "#0C4A6E" },
   };
 
+  const isVisible = useIntersectionObserver("experience");
+
+  const fadeBottomFunc = (delay = "") =>
+    `${isVisible ? `fade-in-bottom ${delay}` : "fade-out-bottom"}`;
+
   const [selectedCategories, setSelectedCategories] = useState(categories);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const dropdownRef = useRef(null);
@@ -145,8 +150,8 @@ export default function Experience() {
 
   return (
     <section id="experience" className="exp-section">
-      <div className="container">
-        <div className="section-header">
+      <div className={`container `}>
+        <div className={`section-header ${fadeBottomFunc()}`}>
           <div>
             <h2 className="section-title">Experiences</h2>
             <p className="text-gray-600">
@@ -199,9 +204,15 @@ export default function Experience() {
           </div>
         </div>
 
-        <div>
+        <div className={`${fadeBottomFunc()}`}>
           {filteredExperiences.map((experience, index) => (
-            <div className="exp-item" key={index}>
+            <div
+              className={`exp-item ${fadeBottomFunc()}`}
+              style={{
+                animationDelay: `${index * 0.1 + index * 0.05}s`,
+              }}
+              key={index}
+            >
               <div className="exp-card">
                 <div className="timeline-dot"></div>
                 <div className="card-header">
