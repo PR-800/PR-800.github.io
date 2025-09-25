@@ -6,3 +6,7 @@ html {
   font-family: system-ui, sans-serif, ui-sans-serif;
   cursor: default;
 }
+
+button {
+  cursor: pointer;
+}

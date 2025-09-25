@@ -1,4 +1,4 @@
-.nav-header {
+.nav-section {
   position: fixed;
   top: 0;
   left: 0;
@@ -8,6 +8,17 @@
   background-color: rgba(255, 255, 255, 0.8);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid rgba(229, 231, 235, 1);
+  transition: all 1s ease;
+}
+
+.nav-section.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.nav-section.hide {
+  opacity: 0;
+  transform: translateY(-100%);
 }
 
 .nav-container {
@@ -35,7 +46,6 @@
 }
 
 .logo-content {
-  background: white;
   padding-right: 8px;
   position: relative;
   z-index: 2;
@@ -52,10 +62,7 @@
   overflow: hidden;
   display: flex;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.logo-button:hover .slide-content {
-  width: 300px;
+  width: 500px;
 }
 
 .name-text {
@@ -67,6 +74,8 @@
 
 .name-divide {
   opacity: 0;
+  position: relative;
+  left: 8px;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 

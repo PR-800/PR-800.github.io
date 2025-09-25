@@ -7,7 +7,7 @@ import "../../hooks/fadeAnimation.css";
 // import profileImage from "../../assets/profileImg.jpg";
 import profileImage from "/assets/grey.png";
 
-export default function About() {
+export default function About({ show }) {
   const visibleHighlights = [
     {
       text: "Full-stack developer with Data Science expertise",
@@ -85,7 +85,7 @@ export default function About() {
   const totalHeight = visibleHeight + hiddenHeight + 32 + 16;
 
   return (
-    <section id="about" className="about-section">
+    <section id="about" className={`about-section ${show ? "show" : "hide"}`}>
       <div className="about-container">
         <div className="education-grid">
           <div
@@ -213,9 +213,7 @@ export default function About() {
                 </div>
               )}
 
-              {activeTab === "info" && (
-                <div></div>
-              )}
+              {activeTab === "info" && <div></div>}
             </div>
           </div>
         </div>

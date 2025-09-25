@@ -4,7 +4,7 @@ import "../../hooks/fadeAnimation.css";
 import { supabase } from "../../hooks/supabase";
 import { useEffect, useState } from "react";
 
-export default function Skills() {
+export default function Skills({ show }) {
   const [skillData, setSkillData] = useState([]);
 
   useEffect(() => {
@@ -41,7 +41,7 @@ export default function Skills() {
   };
 
   return (
-    <section id="skills" className="skill-section">
+    <section id="skills" className={`skill-section ${show ? "show" : "hide"}`}>
       <div className="skill-container">
         <div className="skills-grid">
           {skillData.map((category) => (

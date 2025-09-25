@@ -4,7 +4,7 @@ import "react-tooltip/dist/react-tooltip.css";
 import { useState, useRef, useEffect } from "react";
 import { useIntersectionObserver } from "../../hooks/useObserver";
 
-export default function Experience() {
+export default function Experience({ show }) {
   const experiences = [
     {
       title: "Cooperative Education",
@@ -117,6 +117,9 @@ export default function Experience() {
   const fadeBottomFunc = (delay = "") =>
     `${isVisible ? `fade-in-bottom ${delay}` : "fade-out-bottom"}`;
 
+  const fadeBottomHeaderFunc = () =>
+    `${isVisible ? `fade-in-bottom-alt` : "fade-out-bottom-alt"}`;
+
   const [selectedCategories, setSelectedCategories] = useState(categories);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const dropdownRef = useRef(null);
@@ -149,9 +152,14 @@ export default function Experience() {
   }, []);
 
   return (
-    <section id="experience" className="exp-section">
-      <div className={`container `}>
-        <div className={`section-header ${fadeBottomFunc()}`}>
+    <section
+      id="experience"
+      className={`exp-section ${
+        show ? "show" : "hide"
+      }`}
+    >
+      <div className={`container`}>
+        <div className={`section-header ${fadeBottomHeaderFunc()}`}>
           <div>
             <h2 className="section-title">Experiences</h2>
             <p className="text-gray-600">

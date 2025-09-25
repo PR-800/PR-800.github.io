@@ -6,6 +6,18 @@
   justify-content: center;
   position: relative;
   overflow: hidden;
+  transition: all 1s ease;
+  transition-delay: 1s;
+}
+
+.skill-section.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.skill-section.hide {
+  opacity: 0;
+  transform: translateY(10);
 }
 
 .skill-container {

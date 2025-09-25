@@ -1,13 +1,15 @@
 import { useScroll } from "../../hooks/useScroll";
 import "./Navbar.css";
 
-export default function Navbar() {
+export default function Navbar({ show }) {
   const navItems = ["About", "Skills", "Experience", "Projects", "Contact"];
 
   const { scrollToSection } = useScroll();
 
   return (
-    <header className="nav-header">
+    <header
+      className={`nav-section ${show ? "show" : "hide"}`}
+    >
       <div className="nav-container">
         <div className="nav-content">
           {/* Portfolio */}
@@ -18,9 +20,9 @@ export default function Navbar() {
             <span className="logo-container">
               <span className="logo-content">
                 <span className="main-text">Portfolio</span>
+                <span className="name-divide">|</span>
               </span>
               <span className="slide-content">
-                <span className="name-divide">|</span>
                 <span className="name-text">Titipa Eamsiriwong</span>
               </span>
             </span>

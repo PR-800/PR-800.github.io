@@ -6,6 +6,18 @@
   justify-content: start;
   position: relative;
   overflow: hidden;
+  transition: all 1s ease;
+  transition-delay: 1s;
+}
+
+.about-section.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.about-section.hide {
+  opacity: 0;
+  transform: translateY(10);
 }
 
 .about-container {
@@ -245,7 +257,6 @@
 .tab-content {
   flex: 1;
 }
-
 
 @media (min-width: 768px) {
   .grid {
