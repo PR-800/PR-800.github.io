@@ -268,21 +268,10 @@
   }
 }
 
-@media (max-width: 768px) {
-  .about-section {
-    place-items: center;
-  }
-
-  .education-grid {
-    grid-template-columns: repeat(1, minmax(150px, 1fr));
-    gap: 0px;
-    place-items: center;
-  }
-
-  .education-divider {
-    width: 15rem;
-    height: 2px;
-    margin: 10px;
+@media (max-width: 450px) {
+  .tab {
+    padding: 12px 10px;
+    font-size: 14px;
   }
 }
 
@@ -301,6 +290,36 @@
     width: 15rem;
     height: 2px;
     margin: 10px;
+  }
+
+  .photo-placeholder {
+    width: 160px;
+    height: 160px;
+  }
+
+  .about-section {
+    place-items: center;
+  }
+
+  .education-grid {
+    grid-template-columns: repeat(1, minmax(150px, 1fr));
+    gap: 0px;
+    place-items: center;
+  }
+
+  .education-divider {
+    width: 15rem;
+    height: 2px;
+    margin: 10px;
+  }
+
+  .tab-navigation {
+    align-items: center;
+    justify-content: center;
+  }
+
+  .grid {
+    gap: 25px;
   }
 }
 

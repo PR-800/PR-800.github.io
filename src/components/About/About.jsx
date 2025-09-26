@@ -83,7 +83,7 @@ export default function About({ show }) {
   };
 
   const totalHeight = visibleHeight + hiddenHeight + 32 + 16;
-
+ 
   return (
     <section id="about" className={`about-section ${show ? "show" : "hide"}`}>
       <div className="about-container">

@@ -151,12 +151,59 @@ export default function Experience({ show }) {
     };
   }, []);
 
+  const FilterDropdown = () => {
+    return (
+      <div ref={dropdownRef} className="filter-dropdown">
+        <button
+          onClick={() => {
+            setIsFilterOpen(!isFilterOpen);
+          }}
+          className={`filter-button ${isFilterOpen ? "open" : ""}`}
+        >
+          <ion-icon name="filter-outline"></ion-icon>
+          <span>Filter</span>
+        </button>
+
+        {isFilterOpen && (
+          <div className="filter-menu">
+            <div className="filter-menu-options">
+              {categories.map((category) => (
+                <label key={category} className="filter-option">
+                  <input
+                    type="checkbox"
+                    checked={selectedCategories.includes(category)}
+                    onChange={() => handleCategoryToggle(category)}
+                  />
+                  <span>{category}</span>
+                  <span className="count">
+                    (
+                    {
+                      experiences.filter((exp) => exp.category === category)
+                        .length
+                    }
+                    )
+                  </span>
+                </label>
+              ))}
+            </div>
+            <div className="filter-menu-actions">
+              <button onClick={() => setSelectedCategories(categories)}>
+                Select All
+              </button>
+              <button onClick={() => setSelectedCategories([])}>
+                Clear All
+              </button>
+            </div>
+          </div>
+        )}
+      </div>
+    );
+  };
+
   return (
     <section
       id="experience"
-      className={`exp-section ${
-        show ? "show" : "hide"
-      }`}
+      className={`exp-section ${show ? "show" : "hide"}`}
     >
       <div className={`container`}>
         <div className={`section-header ${fadeBottomHeaderFunc()}`}>
@@ -167,189 +214,150 @@ export default function Experience({ show }) {
               shown
             </p>
           </div>
-
-          <div ref={dropdownRef} className="filter-dropdown">
-            <button
-              onClick={() => setIsFilterOpen(!isFilterOpen)}
-              className={`filter-button ${isFilterOpen ? "open" : ""}`}
-            >
-              <ion-icon name="filter-outline"></ion-icon>
-              <span>Filter</span>
-            </button>
-
-            {isFilterOpen && (
-              <div className="filter-menu">
-                <div className="filter-menu-options">
-                  {categories.map((category) => (
-                    <label key={category} className="filter-option">
-                      <input
-                        type="checkbox"
-                        checked={selectedCategories.includes(category)}
-                        onChange={() => handleCategoryToggle(category)}
-                      />
-                      <span>{category}</span>
-                      <span className="count">
-                        (
-                        {
-                          experiences.filter((exp) => exp.category === category)
-                            .length
-                        }
-                        )
-                      </span>
-                    </label>
-                  ))}
-                </div>
-                <div className="filter-menu-actions">
-                  <button onClick={() => setSelectedCategories(categories)}>
-                    Select All
-                  </button>
-                  <button onClick={() => setSelectedCategories([])}>
-                    Clear All
-                  </button>
-                </div>
-              </div>
-            )}
-          </div>
         </div>
 
-        <div className={`${fadeBottomFunc()}`}>
-          {filteredExperiences.map((experience, index) => (
-            <div
-              className={`exp-item ${fadeBottomFunc()}`}
-              style={{
-                animationDelay: `${index * 0.1 + index * 0.05}s`,
-              }}
-              key={index}
-            >
-              <div className="exp-card">
-                <div className="timeline-dot"></div>
-                <div className="card-header">
-                  <div className="job-info">
-                    <h3 className="job-title">
-                      {experience.title}
-                      <div className="comment-container">
-                        <a className={`comment-button tooltip-${index}`}>
-                          <ion-icon name="chatbubble-outline"></ion-icon>
-                        </a>
-                        <Tooltip
-                          anchorSelect={`.tooltip-${index}`}
-                          place="left"
-                          style={{
-                            maxWidth: "min(280px, calc(100vw - 40px))", // Responsive to screen size
-                            fontWeight: "400",
-                            fontSize: "14px",
-                            lineHeight: "1.4",
-                            borderRadius: "8px",
-                          }}
-                        >
-                          <div
+        <div className={`content-wrapper ${fadeBottomHeaderFunc()}`}>
+          <FilterDropdown />
+          <div className={`${fadeBottomFunc()}`}>
+            {filteredExperiences.map((experience, index) => (
+              <div
+                className={`exp-item ${fadeBottomFunc()} `}
+                style={{
+                  animationDelay: `${index * 0.1 + index * 0.05}s`,
+                }}
+                key={index}
+              >
+                <div className="exp-card">
+                  <div className="timeline-dot"></div>
+                  <div className="card-header">
+                    <div className="job-info">
+                      <h3 className="job-title">
+                        {experience.title}
+                        <div className="comment-container">
+                          <a className={`comment-button tooltip-${index}`}>
+                            <ion-icon name="chatbubble-outline"></ion-icon>
+                          </a>
+                          <Tooltip
+                            anchorSelect={`.tooltip-${index}`}
+                            place="left"
                             style={{
-                              display: "flex",
-                              alignItems: "flex-start",
-                              gap: "8px",
-                              marginTop: "8px",
-                              marginBottom: "8px",
+                              maxWidth: "min(280px, calc(100vw - 40px))", // Responsive to screen size
+                              fontWeight: "400",
+                              fontSize: "14px",
+                              lineHeight: "1.4",
+                              borderRadius: "8px",
                             }}
                           >
-                            <span
+                            <div
                               style={{
-                                fontSize: "18px",
-                                animation: "bounce 2s infinite",
+                                display: "flex",
+                                alignItems: "flex-start",
+                                gap: "8px",
+                                marginTop: "8px",
+                                marginBottom: "8px",
                               }}
                             >
-                              {experience.sticker}
-                            </span>
-                            <span
-                              style={{
-                                fontStyle: "italic",
-                              }}
-                            >
-                              "{experience.comment}"
-                            </span>
-                          </div>
-                        </Tooltip>
+                              <span
+                                style={{
+                                  fontSize: "18px",
+                                  animation: "bounce 2s infinite",
+                                }}
+                              >
+                                {experience.sticker}
+                              </span>
+                              <span
+                                style={{
+                                  fontStyle: "italic",
+                                }}
+                              >
+                                "{experience.comment}"
+                              </span>
+                            </div>
+                          </Tooltip>
+                        </div>
+                      </h3>
+                      <div
+                        className="company-name"
+                        style={{
+                          color: categoryColors[experience.category].text,
+                        }}
+                      >
+                        {experience.company}
                       </div>
-                    </h3>
-                    <div
-                      className="company-name"
-                      style={{
-                        color: categoryColors[experience.category].text,
-                      }}
-                    >
-                      {experience.company}
-                    </div>
-                    <div
-                      className="category"
-                      style={{
-                        color: categoryColors[experience.category].text,
-                        backgroundColor: categoryColors[experience.category].bg,
-                      }}
-                    >
-                      {experience.category}
-                    </div>
-                    <div className="location">
-                      <ion-icon name="location-outline"></ion-icon>
-                      <span>{experience.location}</span>
-                    </div>
-                    <div className="duration">
-                      <ion-icon name="calendar-clear-outline"></ion-icon>
-                      <span>{experience.duration}</span>
-                    </div>
-                  </div>
-                </div>
-
-                <div>
-                  <ul>
-                    {experience.description.map((bullet, index) => (
-                      <li key={index} className="bullet-item">
-                        <span
-                          className="bullet-dot"
-                          style={{
-                            backgroundColor:
-                              categoryColors[experience.category].bg,
-                          }}
-                        ></span>
-                        <span className="bullet-text">{bullet}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                <div className="technologies-section">
-                  <h4 className="technologies-title">Technologies</h4>
-                  <div className="technologies-list">
-                    {experience.technologies.map((tech, index) => (
-                      <span
-                        className="tech-tag"
-                        key={index}
+                      <div
+                        className="category"
                         style={{
                           color: categoryColors[experience.category].text,
                           backgroundColor:
                             categoryColors[experience.category].bg,
                         }}
                       >
-                        {tech}
-                      </span>
-                    ))}
+                        {experience.category}
+                      </div>
+                      <div className="location">
+                        <ion-icon name="location-outline"></ion-icon>
+                        <span>{experience.location}</span>
+                      </div>
+                      <div className="duration">
+                        <ion-icon name="calendar-clear-outline"></ion-icon>
+                        <span>{experience.duration}</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div>
+                    <ul>
+                      {experience.description.map((bullet, index) => (
+                        <li key={index} className="bullet-item">
+                          <span
+                            className="bullet-dot"
+                            style={{
+                              backgroundColor:
+                                categoryColors[experience.category].bg,
+                            }}
+                          ></span>
+                          <span className="bullet-text">{bullet}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div className="technologies-section">
+                    <h4 className="technologies-title">Technologies</h4>
+                    <div className="technologies-list">
+                      {experience.technologies.map((tech, index) => (
+                        <span
+                          className="tech-tag"
+                          key={index}
+                          style={{
+                            color: categoryColors[experience.category].text,
+                            backgroundColor:
+                              categoryColors[experience.category].bg,
+                          }}
+                        >
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
 
-          {filteredExperiences.length === 0 && (
-            <div className="no-experiences">
-              <p className="no-experiences-text">
-                No experiences match the selected filters.
-              </p>
-              <button
-                className="show-all-btn"
-                onClick={() => setSelectedCategories(categories)}
-              >
-                Show All Experiences
-              </button>
-            </div>
-          )}
+            {filteredExperiences.length === 0 && (
+              <div className="no-experiences">
+                <p className="no-experiences-text">
+                  No experiences match the selected filters.
+                </p>
+                <button
+                  className="show-all-btn"
+                  onClick={() => setSelectedCategories(categories)}
+                >
+                  Show All Experiences
+                </button>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </section>

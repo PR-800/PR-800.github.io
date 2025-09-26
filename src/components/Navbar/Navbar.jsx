@@ -23,7 +23,7 @@ export default function Navbar({ show }) {
                 <span className="name-divide">|</span>
               </span>
               <span className="slide-content">
-                <span className="name-text">Titipa Eamsiriwong</span>
+                <span className="name-text">Titipa</span>
               </span>
             </span>
           </button>

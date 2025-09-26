@@ -62,7 +62,7 @@
   overflow: hidden;
   display: flex;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  width: 500px;
+  width: 170px;
 }
 
 .name-text {
@@ -70,6 +70,10 @@
   opacity: 0;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   white-space: nowrap;
+}
+
+.name-text::after {
+  content: " Eamsiriwong";
 }
 
 .name-divide {
@@ -146,6 +150,20 @@
 
   .nav-mobile {
     display: none;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 850px) {
+  .name-text::after {
+    content: "";
+  }
+
+  .logo-button:hover .name-text {
+    transform: translateX(20%);
+  }
+
+  .slide-content {
+    width: 100px;
   }
 }
 
