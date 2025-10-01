@@ -1,5 +1,5 @@
 .hero-section {
-  min-height: 100vh;
+  height: 100vh;
   background-color: white;
   display: flex;
   align-items: center;
@@ -88,16 +88,33 @@
 
 .hero-content {
   margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+}
+
+.avatar-placeholder {
+  width: 500px;
+  height: 500px;
+  /* background-color: blue; */
+  overflow: hidden;      /* crop content */
+  position: relative;
+}
+
+.avatar-placeholder {
+  clip-path: inset(0 0 60px 0); /* crop 30px from bottom */
 }
 
 .hero-header {
-  margin-bottom: 2rem;
+  text-align: left;
+  align-items: center;
+  width: 800px;
+  margin-top: 50px
 }
 
 .hero-title {
-  font-size: 3.75rem;
+  font-size: 90px;
   font-weight: 300;
-  letter-spacing: -0.025em;
+  letter-spacing: -0.075px;
   background: linear-gradient(135deg, #1a365d 0%, #2563eb 100%);
   -webkit-background-clip: text; /* Safari support */
   background-clip: text;
@@ -107,16 +124,17 @@
 
 .hero-divider {
   width: 10rem;
-  height: 1.5px;
+  height: 2px;
   background-color: #d1d5db;
-  margin: 1.5rem auto;
+  margin: 20px 13px;
 }
 
 .hero-subtitle {
-  font-size: 1.5rem;
+  font-size: 30px;
   font-weight: 300;
-  color: black;
+  color: rgb(105, 105, 105);
   letter-spacing: -0.025em;
+  margin-left: 13px;
 }
 
 .hero-description {
@@ -131,11 +149,25 @@
 
 .scroll-button {
   position: absolute;
-  top: 2rem;
+  top: 0;
   left: 50%;
   transform: translateX(-50%);
   animation: bounce 1s infinite;
   transition: transform 0.2s;
+}
+
+.get-in-touch-button {
+  background-color: #2563eb;
+  color: white;
+  padding: 15px 24px;
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  border: none;
+  border-radius: 10px;
+  margin: 50px 10px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
 }
 
 @keyframes bounce {
@@ -148,32 +180,18 @@
   }
 }
 
-@media (min-width: 768px) {
-  .hero-title {
-    font-size: 6rem;
-  }
-
-  .hero-subtitle {
-    font-size: 1.875rem;
-  }
-
-  .hero-description {
-    font-size: 1.25rem;
-  }
-}
-
 @media (max-width: 905px) {
   .hero-description br {
     display: none;
   }
-}
 
-@media (min-width: 1024px) {
-  .hero-title {
-    font-size: 8rem;
+  .hero-header {
+    text-align: center;
+    align-items: center;
+    justify-content: center;
   }
 
-  .hero-subtitle {
-    font-size: 2.25rem;
+  .hero-divider {
+    margin: 20px auto;
   }
 }

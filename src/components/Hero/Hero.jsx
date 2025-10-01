@@ -3,6 +3,7 @@ import { useScroll } from "../../hooks/useScroll";
 import { useIntersectionObserver } from "../../hooks/useObserver";
 import "../../hooks/fadeAnimation.css";
 import { useState, useEffect } from "react";
+import Spline from "@splinetool/react-spline";
 
 export default function Hero({ show }) {
   const isVisible = useIntersectionObserver("hero");
@@ -16,11 +17,7 @@ export default function Hero({ show }) {
   const [showCursor, setShowCursor] = useState(true);
   const fullName = "Titipa Eamsiriwong";
   const fullPosition = "Junior Full-Stack Developer";
-  const fullDesc = [
-    "Information Technology student graduate with proven skills in data-driven solutions.",
-    "Experienced in full-stack development, data science, and ML solutions with teaching background.",
-    "Passionate about creating user-focused, data-driven experiences.",
-  ];
+  const fullDesc = ["Turning ambitious ideas into working solutions"];
   const [name, setName] = useState("");
   const [position, setPosition] = useState("");
   const [showPosition, setShowPosition] = useState(false);
@@ -102,37 +99,42 @@ export default function Hero({ show }) {
       </div>
       <div className="hero-container">
         <div className="hero-content">
-          <div className="hero-header">
-            <div className="text-center">
-              <h1 className={`hero-title ${fadeBottomFunc()}`}>
-                {name}
-                {cursorPosition === "name" && showCursor && <span>|</span>}
-              </h1>
-              {showPosition && (
-                <div
-                  className={`hero-divider ${fadeBottomFunc("delay-200")}`}
-                ></div>
-              )}
-              <h2 className={`hero-subtitle ${fadeBottomFunc("delay-400")}`}>
-                {position}
-                {cursorPosition === "position" && showCursor && <span>|</span>}
-              </h2>
-            </div>
+          <div className={`avatar-placeholder`}>
+            <Spline
+              className={`${fadeBottomFunc()}`}
+              scene="https://prod.spline.design/xVtDciZzALXSjcmp/scene.splinecode"
+            />
           </div>
 
-          <p className={`hero-description ${fadeBottomFunc("delay-600")}`}>
-            {desc.split("... ").map((sentence, index) => (
-              <span key={index}>
-                {sentence}
-                {index < desc.split("... ").length - 1 && (
-                  <>
-                    <br /> {}
-                  </>
-                )}
-              </span>
-            ))}
-            {cursorPosition === "desc" && showCursor && <span>|</span>}
-          </p>
+          <div className="hero-header">
+            <h1 className={`hero-title ${fadeBottomFunc()}`}>
+              {name}
+              {cursorPosition === "name" && showCursor && <span>|</span>}
+            </h1>
+            {showPosition && (
+              <div
+                className={`hero-divider ${fadeBottomFunc("delay-200")}`}
+              ></div>
+            )}
+            <h2 className={`hero-subtitle ${fadeBottomFunc("delay-400")}`}>
+              {position}
+              {cursorPosition === "position" && showCursor && <span>|</span>}
+            </h2>
+            {/* <p className={`hero-description ${fadeBottomFunc("delay-600")}`}>
+              {desc.split("... ").map((sentence, index) => (
+                <span key={index}>
+                  {sentence}
+                  {index < desc.split("... ").length - 1 && (
+                    <>
+                      <br /> {}
+                    </>
+                  )}
+                </span>
+              ))}
+              {cursorPosition === "desc" && showCursor && <span>|</span>}
+            </p> */}
+            <button className="get-in-touch-button">Get in Touch</button>
+          </div>
         </div>
         <button
           className={`${fadeBottomFunc("delay-800")}`}
