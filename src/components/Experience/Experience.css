@@ -1,5 +1,5 @@
 .exp-section {
-  padding: 64px 24px;
+  padding: 40px 24px;
   background-color: #f9fafb;
   display: flex;
   align-items: center;
@@ -122,6 +122,7 @@
 
 .company-name {
   font-weight: 600;
+  margin-left: 2px;
 }
 
 .category {
@@ -200,7 +201,7 @@
 }
 
 .technologies-section {
-  margin-bottom: 16px;
+  margin: 15px 0 0 5px;
 }
 
 .technologies-title {
@@ -210,6 +211,7 @@
   text-transform: uppercase;
   letter-spacing: 0.05em;
   margin-bottom: 8px;
+  margin-bottom: 10px;
 }
 
 .technologies-list {

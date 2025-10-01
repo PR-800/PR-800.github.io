@@ -4,25 +4,25 @@ import "./About.css";
 import { useScroll } from "../../hooks/useScroll";
 import { useIntersectionObserver } from "../../hooks/useObserver";
 import "../../hooks/fadeAnimation.css";
-// import profileImage from "../../assets/profileImg.jpg";
-import profileImage from "/assets/grey.png";
+import profileImage from "/assets/profileImg2.png";
+// import profileImage from "/assets/grey.png";
 
 export default function About({ show }) {
   const visibleHighlights = [
     {
-      text: "Full-stack developer with Data Science expertise",
+      text: "A full-stack developer with Data Science expertise",
     },
     {
-      text: "Delivered predictive maintenance software for Toyota facility",
+      text: "Proficient across multiple programming languages & frameworks",
     },
     {
-      text: "Achieved 97% accuracy in prod-level ML application testing",
+      text: "Delivered predictive maintenance solutions for Toyota facilities, achieving 97% accuracy in prod-level ML application testing.",
     },
   ];
 
   const hiddenHighlights = [
     {
-      text: "Teaching experience with 100+ students across 3 TA roles",
+      text: "Mentored 100+ students across multiple teaching assistant roles",
     },
     {
       text: "Strong English communication skills (TOEIC 840)",
@@ -50,6 +50,7 @@ export default function About({ show }) {
   const [hiddenHeight, setHiddenHeight] = useState(0);
   const [visibleHeight, setVisibleHeight] = useState(0);
   const [activeTab, setActiveTab] = useState("info");
+  const [isSecretCard, setIsSecretCard] = useState(false);
 
   // Get visible highlight height on mount
   useEffect(() => {
@@ -83,7 +84,7 @@ export default function About({ show }) {
   };
 
   const totalHeight = visibleHeight + hiddenHeight + 32 + 16;
- 
+
   return (
     <section id="about" className={`about-section ${show ? "show" : "hide"}`}>
       <div className="about-container">
@@ -143,9 +144,23 @@ export default function About({ show }) {
 
         <div className={`grid ${fadeBottomFunc()}`}>
           <div className="photo-section">
-            <div className="photo-placeholder">
+            <div
+              className={`photo-placeholder ${isSecretCard ? "secret" : ""}`}
+            >
               <img src={profileImage} />
+              {isSecretCard && (
+                <div className="floating-circles">
+                  <img src="/assets/black.png" className="circle circle-1" />
+                  <img src="/assets/black.png" className="circle circle-2" />
+                  <img src="/assets/black.png" className="circle circle-3" />
+                </div>
+              )}
             </div>
+            {/* <ion-icon
+              name={isSecretCard ? "gift" : "sparkles"}
+              onClick={setIsSecretCard(!isSecretCard)}
+              className={`secret-button`}
+            ></ion-icon> */}
           </div>
 
           <div>
@@ -213,7 +228,41 @@ export default function About({ show }) {
                 </div>
               )}
 
-              {activeTab === "info" && <div></div>}
+              {activeTab === "info" && (
+                <div className={`about-me ${fadeBottomFunc()}`}>
+                  <div className="about-me-content">
+                    <p
+                      style={{ marginBottom: "8px" }}
+                    >
+                      Hello, I’m Titipa E.
+                    </p>
+                    I have experience in{" "}
+                    <span className="keyword">
+                      full-stack development, data science, and ML solutions
+                    </span>
+                    , with a strong background in teaching. Currently, I work as
+                    a part-time TA at my college, support external tech training
+                    programs, and work on some independent projects.
+                    {/* <span>&emsp;&emsp;&emsp;</span>I thrive on solving{" "}
+                    <span className="keyword">
+                      complex technical challenges
+                    </span>{" "}
+                    and turning ambitious ideas into working solutions. When
+                    faced with unfamiliar territory, I{" "}
+                    <span className="keyword">dive deep and learn fast</span>. I
+                    believe the best solutions come from curiosity, persistence,
+                    and clear communication. */}
+                  </div>
+                  {/* <div class="orbit-system">
+                    <div class="orbit orbit-1">
+                      <div class="planet"></div>
+                    </div>
+                    <div class="orbit orbit-2">
+                      <div class="planet planet-2"></div>
+                    </div>
+                  </div> */}
+                </div>
+              )}
             </div>
           </div>
         </div>

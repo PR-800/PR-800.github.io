@@ -7,7 +7,7 @@ import { useIntersectionObserver } from "../../hooks/useObserver";
 export default function Experience({ show }) {
   const experiences = [
     {
-      title: "Cooperative Education",
+      title: "Software Developer - Cooperative Education",
       company: "Toyota Motor Thailand Co., Ltd. (TMT)",
       category: "Professional Experience",
       location: "Bangkok, Thailand",
@@ -20,14 +20,14 @@ export default function Experience({ show }) {
       technologies: [
         "Python",
         "Flask",
-        "Machine Learning",
-        "Scikit-learn",
         "HTML/CSS",
         "JavaScript",
         "PostgreSQL",
+        "Machine Learning",
+        "Scikit-learn",
       ],
       comment:
-        "First industry experience! Seeing my ML model work in a real Toyota factory was incredible.",
+        "I self-taught data science from zero in just 4 months to deliver this project, learning new technical skills as well as working under tight deadlines are very challenge !",
       sticker: "🚗",
     },
     {

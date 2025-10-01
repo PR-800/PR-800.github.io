@@ -7,7 +7,8 @@ export const useIntersectionObserver = (sectionId) => {
     const observer = new IntersectionObserver(
       ([entry]) => setIsVisible(entry.isIntersecting),
       {
-        threshold: 0.2, // Trigger when 30% of the section is visible
+        threshold: 0,
+        rootMargin: "-200px 0px",
       }
     );
 
