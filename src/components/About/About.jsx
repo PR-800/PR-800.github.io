@@ -123,7 +123,7 @@ export default function About({ show }) {
                 <div className="detail-item">
                   <span className="detail-label">Specialization</span>
                   <span className="detail-value">
-                    Full-Stack Web Development
+                    Web Development
                   </span>
                 </div>
                 <div className="detail-item">
