@@ -1,15 +1,36 @@
-import { useScroll } from "../../hooks/useScroll";
 import "./Navbar.css";
+import { useState, useRef, useEffect } from "react";
+import { useScroll } from "../../hooks/useScroll";
 
 export default function Navbar({ show }) {
   const navItems = ["About", "Skills", "Experience", "Projects", "Contact"];
 
   const { scrollToSection } = useScroll();
 
+  const [navMobileOpen, setNavMobileOpen] = useState(false);
+  const toggleMobileNav = () => setNavMobileOpen(!navMobileOpen);
+
+  const dropdownNavRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        dropdownNavRef.current &&
+        !dropdownNavRef.current.contains(event.target)
+      ) {
+        setNavMobileOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   return (
-    <header
-      className={`nav-section ${show ? "show" : "hide"}`}
-    >
+    <header className={`nav-section ${show ? "show" : "hide"}`}>
       <div className="nav-container">
         <div className="nav-content">
           {/* Portfolio */}
@@ -46,9 +67,28 @@ export default function Navbar({ show }) {
           </nav>
 
           {/* Mobile Navigation */}
-          <button className="nav-mobile">
-            <ion-icon name="menu"></ion-icon>
-          </button>
+          <div className="nav-mobile-dropdown" ref={dropdownNavRef}>
+            <button className="nav-mobile-button" onClick={toggleMobileNav}>
+              <ion-icon
+                name="menu"
+                style={{ color: navMobileOpen ? "#2563eb" : "" }}
+              ></ion-icon>
+            </button>
+
+            {navMobileOpen && (
+              <div className="nav-mobile-menu">
+                {navItems.map((item) => (
+                  <button
+                    key={item}
+                    className="nav-mobile-list"
+                    onClick={() => scrollToSection(item)}
+                  >
+                    {item}
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </header>

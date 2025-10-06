@@ -1,6 +1,51 @@
 import "./Footer.css";
+import { useState } from "react";
+import { supabase } from "../../hooks/supabase";
 
 export default function Footer() {
+  const [formData, setFormData] = useState({
+    message: "",
+  });
+  const [submitStatus, setSubmitStatus] = useState(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const formInputChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+
+    if (submitStatus === "success") {
+      setSubmitStatus(null);
+    }
+  };
+
+  const formSubmit = async (e) => {
+    e.preventDefault();
+    setSubmitStatus(null);
+    setIsSubmitting(true);
+
+    try {
+      const { data, error } = await supabase.rpc("send_feedback", {
+        message: formData.message,
+      });
+
+      if (error) {
+        // console.error("Supabase error:", error);
+        setSubmitStatus("error");
+      } else {
+        // console.log("Success:", data);
+        setSubmitStatus("success");
+        setFormData({ message: "" });
+      }
+    } catch (error) {
+      // console.error("Error:", error);
+      setSubmitStatus("error");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <footer className="footer">
       <div className="footer-container">
@@ -13,26 +58,31 @@ export default function Footer() {
             Your thoughts matter! Share suggestions or just say hi. Don't worry,
             this is completely anonymous.
           </p>
-          <form className="feedback-form">
+          <form className="feedback-form" onSubmit={formSubmit}>
             <label className="form-label">Message </label>
             <textarea
               name="message"
+              value={formData.message}
+              onChange={formInputChange}
               className="form-textarea"
               placeholder="Any feedback to make this site better?"
-              // value={formData.message}
-              // onChange={handleChange}
+              maxLength={500}
+              required
             />
-            <div className="char-count">/500</div>
-            {/* <div className="char-count">{formData.message.length}/500</div> */}
+            <div className="char-count">{formData.message.length}/500</div>
 
             <button
-              type="button"
+              type="submit"
               className="submit-button"
-              // disabled={isSubmitting || !formData.message.trim()}
-              // onClick={handleSubmit}
+              disabled={isSubmitting}
             >
-              Send Message
+              {isSubmitting ? <>Processing...</> : <>Send Message</>}
             </button>
+            {submitStatus === "success" && (
+              <div className="success-message">
+                <span>Message sent successfully!</span>
+              </div>
+            )}
           </form>
         </div>
 

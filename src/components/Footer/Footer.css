@@ -66,7 +66,6 @@
   margin-bottom: 8px;
 }
 
-.form-input,
 .form-textarea {
   width: 100%;
   padding: 10px 14px;
@@ -80,14 +79,12 @@
   box-sizing: border-box;
 }
 
-.form-input:focus,
 .form-textarea:focus {
   outline: none;
   border-color: #667eea;
   background: rgba(255, 255, 255, 0.08);
 }
 
-.form-input::placeholder,
 .form-textarea::placeholder {
   color: #6b7280;
 }
@@ -172,34 +169,6 @@
   font-size: 0.75rem;
   color: #d1d5db;
   font-weight: 500;
-}
-
-.stats-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 16px;
-  margin-top: 20px;
-}
-
-.stat-item {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 10px;
-  padding: 16px;
-  text-align: center;
-}
-
-.stat-value {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: #667eea;
-  display: block;
-}
-
-.stat-label {
-  font-size: 0.75rem;
-  color: #9ca3af;
-  margin-top: 4px;
 }
 
 @media (max-width: 968px) {

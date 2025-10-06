@@ -1,4 +1,6 @@
 import "./Contact.css";
+import resumeFile from "/assets/Titipa-E_Resume.pdf";
+import { supabase } from "../../hooks/supabase";
 
 export default function Contact({ show }) {
   const socials = [
@@ -27,6 +29,14 @@ export default function Contact({ show }) {
       href: "https://github.com/PR-800",
     },
   ];
+
+  const resumeDownload = () => {
+    const link = document.createElement("a");
+    link.href = resumeFile;
+    link.download = "Titipa-E_Resume.pdf";
+    link.click();
+  };
+
   return (
     <section
       id="contact"
@@ -76,14 +86,19 @@ export default function Contact({ show }) {
               <div className="resume-subtitle">Updated November 2024 • PDF</div>
             </div>
             <div className="resume-actions">
-              <button className="resume-button download">
+              <button
+                className="resume-button download"
+                onClick={resumeDownload}
+              >
                 <ion-icon name="download-outline"></ion-icon>
                 Download
               </button>
-              <button className="resume-button preview">
-                <ion-icon name="eye-outline"></ion-icon>
-                Preview
-              </button>
+              <a href={resumeFile} target="_blank">
+                <button className="resume-button preview">
+                  <ion-icon name="eye-outline"></ion-icon>
+                  Preview
+                </button>
+              </a>
             </div>
           </div>
         </div>
