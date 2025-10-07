@@ -5,6 +5,7 @@ import resumeFile from "/assets/Titipa-E_Resume.pdf";
 
 export default function Navbar({ show }) {
   const navItems = ["About", "Skills", "Experience", "Contact"];
+  const [activeSection, setActiveSection] = useState("");
 
   const { scrollToSection } = useScroll();
 
@@ -28,6 +29,37 @@ export default function Navbar({ show }) {
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
+  }, []);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = navItems.map((item) =>
+        document.getElementById(item.toLowerCase())
+      );
+
+      const scrollPosition = window.scrollY + window.innerHeight / 2; 
+
+      let currentSection = "";
+
+      for (const section of sections) {
+        if (section) {
+          const sectionTop = section.offsetTop;
+          const sectionBottom = sectionTop + section.offsetHeight;
+
+          if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
+            currentSection = navItems[sections.indexOf(section)];
+            break;
+          }
+        }
+      }
+
+      setActiveSection(currentSection);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    handleScroll();
+
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const resumeDownload = () => {
@@ -63,7 +95,9 @@ export default function Navbar({ show }) {
               {navItems.map((item) => (
                 <button
                   key={item}
-                  className="nav-item-button"
+                  className={`nav-item-button ${
+                    activeSection === item ? "active" : ""
+                  }`}
                   onClick={() => scrollToSection(item)}
                 >
                   {item}
@@ -101,7 +135,9 @@ export default function Navbar({ show }) {
                 {navItems.map((item) => (
                   <button
                     key={item}
-                    className="nav-mobile-list"
+                    className={`nav-mobile-list ${
+                      activeSection === item ? "active" : ""
+                    }`}
                     onClick={() => scrollToSection(item)}
                   >
                     {item}
