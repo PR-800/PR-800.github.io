@@ -1,6 +1,6 @@
 .about-section {
   /* min-height: 100vh - 64px; */
-  background-color: #f9fafb;
+  background-color: var(--secondary-bg);
   display: flex;
   align-items: flex-start;
   justify-content: start;
@@ -30,7 +30,6 @@
 }
 
 .education-grid {
-  /* max-width: 800px; */
   display: grid;
   grid-template-columns: 10rem 2px auto;
   gap: 40px;
@@ -40,9 +39,10 @@
 }
 
 .education-label {
-  font-size: 1.5rem;
-  color: #1a365d;
-  text-shadow: 0 2px 4px rgba(37, 99, 235, 0.3);
+  font-size: 23px;
+  font-weight: 700;
+  color: var(--primary-text);
+  text-shadow: 0 2px 4px var(--primary-shadow);
   letter-spacing: 3px;
   text-transform: uppercase;
   padding-top: 4px;
@@ -51,7 +51,7 @@
 .education-divider {
   height: 10rem;
   width: 1.5px;
-  background-color: #d1d5db;
+  background-color: var(--secondary-border);
 }
 
 .education-content {
@@ -62,21 +62,20 @@
 .degree-title {
   font-size: 1.25rem;
   font-weight: 500;
-  color: #1a365d;
+  color: var(--primary-text);
   margin-bottom: 5px;
 }
 
 .university {
   font-size: 1rem;
-  /* color: #374151; */
-  color: #9ca3af;
+  color: var(--secondary-text);
   margin-bottom: 15px;
 }
 
 .honors {
   display: inline-block;
-  background-color: #1a365d;
-  color: #fff;
+  background-color: var(--dark-shade);
+  color:  var(--primary-text-invert);
   font-size: 0.75rem;
   font-weight: 500;
   padding: 4px 8px;
@@ -101,8 +100,7 @@
 
 .detail-label {
   font-size: 0.75rem;
-  /* color: #9ca3af; */
-  color: rgba(26, 54, 93, 0.5);
+  color: var(--secondary-text);
   text-transform: uppercase;
   letter-spacing: 0.5px;
   font-weight: 500;
@@ -110,7 +108,7 @@
 
 .detail-value {
   font-size: 0.875rem;
-  color: #374151;
+  color: var(--primary-text);
   font-weight: 400;
 }
 
@@ -119,10 +117,10 @@
   gap: 48px;
   max-width: 1152px;
   margin: 0 auto;
-  background: white;
+  background: var(--primary-bg);
   padding: 40px;
   border-radius: 12px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 3px var(--secondary-shadow);
 }
 
 .photo-section {
@@ -166,16 +164,16 @@
 }
 
 .highlight-item:hover {
-  background-color: #f9fafb;
+  background-color: var(--secondary-bg);
   transform: translateY(0) scale(1.02);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px var(--secondary-shadow);
   padding: 16px;
 }
 
 .highlight-dot {
   width: 8px;
   height: 8px;
-  background-color: #000;
+  background-color:  var(--secondary-text);
   border-radius: 50%;
   flex-shrink: 0;
   transition: all 0.3s ease;
@@ -183,12 +181,12 @@
 }
 
 .highlight-item:hover .highlight-dot {
-  background-color: #3b82f6;
+  background-color: var(--secondary-focus);
   transform: scale(1.5);
 }
 
 .highlight-text {
-  color: #374151;
+  color: var(--primary-text);
   line-height: 1.75;
   text-align: left;
 }
@@ -216,11 +214,11 @@
 
 .expand-button {
   background: none;
-  border: 1px solid #e5e7eb;
+  border: 1px solid var(--secondary-border);;
   padding: 10px 24px;
   border-radius: 6px;
   cursor: pointer;
-  color: #374151;
+  color: var(--primary-text);
   font-size: 0.875rem;
   transition: all 0.3s ease;
   align-self: flex-start;
@@ -228,13 +226,13 @@
 }
 
 .expand-button:hover {
-  background-color: #f9fafb;
-  border-color: #d1d5db;
+  background-color: var(--secondary-bg);
+  
 }
 
 .tab-navigation {
   display: flex;
-  border-bottom: 1px solid #e2e8f0;
+  border-bottom: 1px solid var(--secondary-border);
   margin-bottom: 24px;
 }
 
@@ -243,7 +241,7 @@
   text-align: justify;
   text-wrap: pretty;
   padding: 10px 15px;
-  color: #374151;
+  color: var(--primary-text);
   line-height: 1.75;
   height: fit-content;
 }
@@ -252,7 +250,7 @@
 .about-me::after {
   font-family: "Courier New", monospace;
   font-size: 2rem;
-  color: #0ea5e9;
+  color: var(--secondary-focus);
   position: absolute;
   font-weight: 300;
 }
@@ -266,7 +264,6 @@
 .about-me::after {
   content: "⌟";
   right: 0;
-  /* bottom: 30px; */
   bottom: -20px;
 }
 
@@ -281,9 +278,7 @@
 
 .keyword {
   font-weight: 500;
-  /* background: linear-gradient(90deg, #3a5cb9, #27909c, rgb(140, 75, 201));
-  background-clip: text; */
-  color: #3b82f6;
+  color: var(--secondary-focus);
 }
 
 .tab {
@@ -292,23 +287,20 @@
   background: none;
   font-size: 16px;
   font-weight: 500;
-  color: #64748b;
+  color: var(--secondary-text);
   cursor: pointer;
   border-bottom: 2px solid transparent;
   transition: all 0.2s ease;
 }
 
 .tab:hover {
-  color: #4d6182;
+  color: var(--secondary-text);
+  filter: brightness(0.7);
 }
 
 .tab.active {
-  color: #3b82f6;
-  border-bottom-color: #3b82f6;
-  /* background: linear-gradient(90deg, #0ea5e9, #1b9887, #a78bfa);
-  background-clip: text;
-  color: transparent;
-  border-image: linear-gradient(90deg, #0ea5e9, #2dd4bf, #a78bfa) 1; */
+  color: var(--secondary-focus);
+  border-bottom-color: var(--secondary-focus);
 }
 
 .tab-content {

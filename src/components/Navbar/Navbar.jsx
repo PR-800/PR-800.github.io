@@ -1,9 +1,10 @@
 import "./Navbar.css";
 import { useState, useRef, useEffect } from "react";
 import { useScroll } from "../../hooks/useScroll";
+import resumeFile from "/assets/Titipa-E_Resume.pdf";
 
 export default function Navbar({ show }) {
-  const navItems = ["About", "Skills", "Experience", "Projects", "Contact"];
+  const navItems = ["About", "Skills", "Experience", "Contact"];
 
   const { scrollToSection } = useScroll();
 
@@ -28,6 +29,13 @@ export default function Navbar({ show }) {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
+
+  const resumeDownload = () => {
+    const link = document.createElement("a");
+    link.href = resumeFile;
+    link.download = "Titipa-E_Resume.pdf";
+    link.click();
+  };
 
   return (
     <header className={`nav-section ${show ? "show" : "hide"}`}>
@@ -62,7 +70,20 @@ export default function Navbar({ show }) {
                 </button>
               ))}
 
-              <button className="resume-button">Resume</button>
+              <div className="resume-nav">
+                <button
+                  className="resume-nav-button left"
+                  onClick={resumeDownload}
+                >
+                  <ion-icon name="download-outline"></ion-icon>
+                  Resume
+                </button>
+                <a href={resumeFile} target="_blank">
+                  <button className="resume-nav-button right">
+                    <ion-icon name="eye-outline"></ion-icon>
+                  </button>
+                </a>
+              </div>
             </div>
           </nav>
 

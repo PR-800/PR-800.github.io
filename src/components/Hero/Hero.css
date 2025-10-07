@@ -1,6 +1,5 @@
 .hero-section {
   min-height: 100vh;
-  background-color: white;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -28,8 +27,8 @@
   bottom: 0;
   background: linear-gradient(
     45deg,
-    rgba(37, 99, 235, 0.02) 0%,
-    rgba(26, 54, 93, 0.02) 100%
+    var(--tertiary-bg) 0%,
+    var(--secondary-bg) 100%
   );
   z-index: 0;
   padding: 1rem;
@@ -49,13 +48,13 @@
   position: absolute;
   width: 200%;
   height: 200%;
-  background: linear-gradient(
-    45deg,
-    rgba(37, 99, 235, 0.03) 0%,
-    rgba(26, 54, 93, 0.03) 50%,
-    rgba(37, 99, 235, 0.03) 100%
-  );
+  background: var(--tertiary-bg);
   animation: wave 15s linear infinite;
+}
+
+.wave:nth-child(1) {
+  filter: brightness(0.3);
+  opacity: 0.3;
 }
 
 .wave:nth-child(2) {
@@ -98,31 +97,31 @@
   font-size: 3.75rem;
   font-weight: 300;
   letter-spacing: -0.025em;
-  background: linear-gradient(135deg, #1a365d 0%, #2563eb 100%);
+  background: linear-gradient(135deg, var(--dark-shade) 0%, var(--secondary-focus) 100%);
   -webkit-background-clip: text; /* Safari support */
   background-clip: text;
   color: transparent;
-  text-shadow: 0 2px 4px rgba(37, 99, 235, 0.5);
+  text-shadow: 0 5px 3px var(--primary-shadow);
 }
 
 .hero-divider {
   width: 10rem;
   height: 1.5px;
-  background-color: #d1d5db;
+  background-color: var(--secondary-border);
   margin: 1.5rem auto;
 }
 
 .hero-subtitle {
-  font-size: 1.5rem;
-  font-weight: 300;
-  color: black;
+  font-size: 25px;
+  font-weight: 350;
+  color: var(--primary-text);
   letter-spacing: -0.025em;
 }
 
 .hero-description {
   font-size: 1.125rem;
   font-weight: 400;
-  color: #4b5563;
+  color: var(--secondary-text);
   max-width: 56rem;
   margin: 0 auto;
   line-height: 1.75;
