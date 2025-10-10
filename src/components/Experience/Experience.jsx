@@ -3,114 +3,29 @@ import { Tooltip } from "react-tooltip";
 import "react-tooltip/dist/react-tooltip.css";
 import { useState, useRef, useEffect } from "react";
 import { useIntersectionObserver } from "../../hooks/useObserver";
+import { supabase } from "../../hooks/supabase";
 
 export default function Experience({ show }) {
-  const experiences = [
-    {
-      title: "Software Developer - Cooperative Education",
-      company: "Toyota Motor Thailand Co., Ltd. (TMT)",
-      category: "Professional Experience",
-      location: "Bangkok, Thailand",
-      duration: "Jun 2024 - Oct 2024",
-      description: [
-        "Led end-to-end development of predictive maintenance system using Machine Learning",
-        "Deployed and tested web application prototype in real manufacturing environment",
-        "Achieved 97.92% accuracy in predictive analytics for production line optimization",
-      ],
-      technologies: [
-        "Python",
-        "Flask",
-        "HTML/CSS",
-        "JavaScript",
-        "PostgreSQL",
-        "Machine Learning",
-        "Scikit-learn",
-      ],
-      comment:
-        "I self-taught data science from zero in just 4 months to deliver this project, learning new technical skills as well as working under tight deadlines are very challenge !",
-      sticker: "🚗",
-    },
-    {
-      title: "Teaching Assistant - Data Analytics & Visualization",
-      company: "KMITL Professional Training Program",
-      category: "Professional Training",
-      location: "Bangkok, Thailand",
-      duration: "May 2025 - Jul 2025",
-      description: [
-        "Supported government officers in professional training program with programming tasks",
-        "Provided consultation on system optimization for internal government operations",
-        "Delivered feedback and insights during project presentations",
-        "Bridged technical concepts with practical government applications",
-      ],
-      technologies: [
-        "Python",
-        "Data Visualization",
-        "Matplotlib",
-        "Statistical Analysis",
-      ],
-      comment:
-        "Teaching government officers taught me to explain complex tech in simple terms!",
-      sticker: "👨‍🏫",
-    },
-    {
-      title: "Teaching Assistant - Big Data Systems",
-      company: "King Mongkut's Institute of Technology Ladkrabang",
-      category: "Academic Teaching",
-      location: "Bangkok, Thailand",
-      duration: "Dec 2024 - May 2025",
-      description: [
-        "Guided 3rd year IT students in PySpark and Spark SQL lab sessions",
-        "Taught large-scale data processing and visualization techniques",
-        "Helped students understand distributed computing concepts",
-        "Facilitated hands-on implementation of big data solutions",
-      ],
-      technologies: [
-        "PySpark",
-        "Spark SQL",
-        "Python",
-        "Big Data",
-        "Data Processing",
-      ],
-      comment:
-        "Watching students' 'aha' moments with big data processing was amazing!",
-      sticker: "📊",
-    },
-    {
-      title: "Teaching Assistant - Data Structures & Algorithms",
-      company: "King Mongkut's Institute of Technology Ladkrabang",
-      category: "Academic Teaching",
-      location: "Bangkok, Thailand",
-      duration: "Dec 2024 - May 2025",
-      description: [
-        "Guided 1st year Financial Engineering students on fundamental programming concepts",
-        "Taught custom implementations of Arrays, Linked Lists, Stacks, and Queues",
-        "Focused on building strong problem-solving foundations",
-        "Mentored students through algorithmic thinking processes",
-      ],
-      technologies: [
-        "Java",
-        "C/C++",
-        "Data Structures",
-        "Algorithms",
-        "Problem Solving",
-      ],
-      comment:
-        "My first teaching role! Students' creative questions kept me on my toes.",
-      sticker: "🌱",
-    },
-  ];
+  const [expData, setExpData] = useState([]);
 
-  const categories = [
-    "Professional Experience",
-    "Professional Training",
-    "Academic Teaching",
-  ];
+  useEffect(() => {
+    async function loadData() {
+      const { data, error } = await supabase.rpc("get_exp_data");
+      const { categories, exp } = data;
 
-  const categoryColors = {
-    "Professional Experience": { bg: "#DBEAFE", text: "#1E3A8A" },
-    "Professional Training": { bg: "#e3e6fcff", text: "#1e298aff" },
-    "Academic Teaching": { bg: "#dcf5f9ff", text: "#0C4A6E" },
-  };
+      const joinTable = categories.map((category) => ({
+        title: category.name,
+        id: category.id,
+        bg_color: category.bg_color,
+        text_color: category.text_color,
+        exp: exp.filter((e) => e.category_id === category.id),
+      }));
+
+      setExpData(joinTable);
+    }
+
+    loadData();
+  }, []);
 
   const isVisible = useIntersectionObserver("experience");
 
@@ -120,13 +35,43 @@ export default function Experience({ show }) {
   const fadeBottomHeaderFunc = () =>
     `${isVisible ? `fade-in-bottom-alt` : "fade-out-bottom-alt"}`;
 
-  const [selectedCategories, setSelectedCategories] = useState(categories);
+  const categories = expData.map((category) => category.id);
+  const allExperiences = expData.flatMap((category) =>
+    category.exp.map((exp) => ({
+      ...exp,
+      category_name: category.title,
+    }))
+  );
+
+  const [selectedCategories, setSelectedCategories] = useState([]);
+
+  useEffect(() => {
+    if (expData.length > 0 && selectedCategories.length === 0) {
+      setSelectedCategories(categories);
+    }
+  }, [expData]);
+
+  const filteredExperiences = allExperiences.filter((exp) =>
+    selectedCategories.includes(exp.category_id)
+  );
+
+  const sortedExperiences = [...filteredExperiences].sort((a, b) => {
+    if (!a.end_date) return -1;
+    if (!b.end_date) return 1;
+
+    return new Date(b.end_date) - new Date(a.end_date);
+  });
+
+  const categoryColors = expData.reduce((acc, category) => {
+    acc[category.id] = {
+      bg: category.bg_color,
+      text: category.text_color,
+    };
+    return acc;
+  }, {});
+
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const dropdownRef = useRef(null);
-
-  const filteredExperiences = experiences.filter((exp) =>
-    selectedCategories.includes(exp.category)
-  );
 
   const handleCategoryToggle = (category) => {
     setSelectedCategories(
@@ -167,22 +112,15 @@ export default function Experience({ show }) {
         {isFilterOpen && (
           <div className="filter-menu">
             <div className="filter-menu-options">
-              {categories.map((category) => (
-                <label key={category} className="filter-option">
+              {expData.map((category) => (
+                <label key={category.id} className="filter-option">
                   <input
                     type="checkbox"
-                    checked={selectedCategories.includes(category)}
-                    onChange={() => handleCategoryToggle(category)}
+                    checked={selectedCategories.includes(category.id)}
+                    onChange={() => handleCategoryToggle(category.id)}
                   />
-                  <span>{category}</span>
-                  <span className="count">
-                    (
-                    {
-                      experiences.filter((exp) => exp.category === category)
-                        .length
-                    }
-                    )
-                  </span>
+                  <span>{category.title}</span>
+                  <span className="count">({category.exp.length})</span>
                 </label>
               ))}
             </div>
@@ -200,6 +138,16 @@ export default function Experience({ show }) {
     );
   };
 
+  const formatDate = (dateString) => {
+    if (!dateString) return "";
+
+    const date = new Date(dateString);
+    const month = date.toLocaleString("en-US", { month: "short" });
+    const year = date.getFullYear();
+
+    return `${month} ${year}`;
+  };
+
   return (
     <section
       id="experience"
@@ -210,8 +158,8 @@ export default function Experience({ show }) {
           <div>
             <h2 className="section-title">Experiences</h2>
             <p className="text-gray-600">
-              {filteredExperiences.length} of {experiences.length} experiences
-              shown
+              {filteredExperiences.length} of {allExperiences.length}{" "}
+              experiences shown
             </p>
           </div>
         </div>
@@ -219,7 +167,7 @@ export default function Experience({ show }) {
         <div className={`content-wrapper ${fadeBottomHeaderFunc()}`}>
           <FilterDropdown />
           <div className={`${fadeBottomFunc()}`}>
-            {filteredExperiences.map((experience, index) => (
+            {sortedExperiences.map((experience, index) => (
               <div
                 className={`exp-item ${fadeBottomFunc()} `}
                 style={{
@@ -279,7 +227,7 @@ export default function Experience({ show }) {
                       <div
                         className="company-name"
                         style={{
-                          color: categoryColors[experience.category].text,
+                          color: categoryColors[experience.category_id].text,
                         }}
                       >
                         {experience.company}
@@ -287,12 +235,12 @@ export default function Experience({ show }) {
                       <div
                         className="category"
                         style={{
-                          color: categoryColors[experience.category].text,
+                          color: categoryColors[experience.category_id].text,
                           backgroundColor:
-                            categoryColors[experience.category].bg,
+                            categoryColors[experience.category_id].bg,
                         }}
                       >
-                        {experience.category}
+                        {experience.category_name}
                       </div>
                       <div className="location">
                         <ion-icon name="location-outline"></ion-icon>
@@ -300,7 +248,10 @@ export default function Experience({ show }) {
                       </div>
                       <div className="duration">
                         <ion-icon name="calendar-clear-outline"></ion-icon>
-                        <span>{experience.duration}</span>
+                        <span>
+                          {formatDate(experience.start_date)} -{" "}
+                          {formatDate(experience.end_date)}
+                        </span>
                       </div>
                     </div>
                   </div>
@@ -313,7 +264,7 @@ export default function Experience({ show }) {
                             className="bullet-dot"
                             style={{
                               backgroundColor:
-                                categoryColors[experience.category].bg,
+                                categoryColors[experience.category_id].bg,
                             }}
                           ></span>
                           <span className="bullet-text">{bullet}</span>
@@ -325,14 +276,14 @@ export default function Experience({ show }) {
                   <div className="technologies-section">
                     <h4 className="technologies-title">Technologies</h4>
                     <div className="technologies-list">
-                      {experience.technologies.map((tech, index) => (
+                      {experience.tags.map((tech, index) => (
                         <span
                           className="tech-tag"
                           key={index}
                           style={{
-                            color: categoryColors[experience.category].text,
+                            color: categoryColors[experience.category_id].text,
                             backgroundColor:
-                              categoryColors[experience.category].bg,
+                              categoryColors[experience.category_id].bg,
                           }}
                         >
                           {tech}

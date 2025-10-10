@@ -9,8 +9,7 @@ export default function Skills({ show }) {
 
   useEffect(() => {
     async function loadData() {
-      const { data, error } = await supabase.rpc("get_portfolio_data");
-
+      const { data, error } = await supabase.rpc("get_skills_data");
       const { categories, skills } = data;
 
       const joinTable = categories.map((category) => ({
