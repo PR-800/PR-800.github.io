@@ -274,7 +274,7 @@ export default function Experience({ show }) {
                   </div>
 
                   <div className="technologies-section">
-                    <h4 className="technologies-title">Technologies</h4>
+                    {/* <h4 className="technologies-title">Tags</h4> */}
                     <div className="technologies-list">
                       {experience.tags.map((tech, index) => (
                         <span
