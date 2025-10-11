@@ -56,8 +56,13 @@ export default function Experience({ show }) {
   );
 
   const sortedExperiences = [...filteredExperiences].sort((a, b) => {
-    if (!a.end_date) return -1;
-    if (!b.end_date) return 1;
+
+    if (a.category_id === 1 && b.category_id !== 1) return -1;
+    if (a.category_id !== 1 && b.category_id === 1) return 1;
+
+    if (!a.end_date && b.end_date) return -1;
+    if (a.end_date && !b.end_date) return 1;
+    if (!a.end_date && !b.end_date) return 0;
 
     return new Date(b.end_date) - new Date(a.end_date);
   });
